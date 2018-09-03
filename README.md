@@ -1,7 +1,7 @@
 # Elm Assignment
 Assignment to learn te beginnings of Elm and functional programming.
 
-For a short introduction to Elm see the [Elm demonstration][demo]. It also provides links more references.
+For a short introduction to Elm see the [Elm demonstration][demo]. It also provides links more references. The [documentation][docs] should probably consulted more often.
 
 ## Assignments
 This project contains a small Elm project. Run the `elm reactor` command and open [http://localhost:8000](http://localhost:8000). You should see a series of assignments being tested. Your goal is to make all the tests pass.
@@ -18,4 +18,5 @@ For example, Let's calculate the Collatz function for `28`. Now `28` is an even 
 Open `src/Assignment/One.elm` and implement the Collatz function.
 
 [demo]: https://github.com/HAN-ASD-DT/elm-demonstration
+[docs]: http://elm-lang.org/docs
 [collatz]: https://en.wikipedia.org/wiki/Collatz_conjecture
