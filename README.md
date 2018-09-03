@@ -26,8 +26,17 @@ Create a type alias for an [`Interval` type][interval]. You should also implemen
 
 Type signatures are provided as well as default implementations. The `intersection` signature uses the [`Maybe` type][maybe].
 
+### Assignment 3
+Study the [documentation for List][list] in order to create a more specialized type. I.e. a **non-empty list**. A non-empty list is a list that guarantees to contain at least a single element. Furthermore, you should also implementations
+
+1. A `singleton` constructor.
+2. `cons` function that appends an element to a non-empty list.
+3. A function `head` that returns the first element of the non-empty list.
+4. And the `tail` function that might return a non-empty list.
+
 [demo]: https://github.com/HAN-ASD-DT/elm-demonstration
 [docs]: http://elm-lang.org/docs
 [collatz]: https://en.wikipedia.org/wiki/Collatz_conjecture
 [interval]: https://en.wikipedia.org/wiki/Interval_(mathematics)
 [maybe]: https://package.elm-lang.org/packages/elm/core/latest/Maybe
+[list]: https://package.elm-lang.org/packages/elm/core/latest/List

@@ -1,6 +1,7 @@
 module Assignment exposing (main)
 
 import Assignment.One exposing (collatz)
+import Assignment.Three exposing (cons, head, singleton, tail)
 import Assignment.Two exposing (hull, intersection, interval)
 import Html
 import Html.Attributes as Attribute
@@ -20,6 +21,14 @@ main =
             , test "hull of [1,3] [6,7] is [1,7]" (equal (interval 1 7) (hull (interval 1 3) (interval 6 7)))
             , test "intersection of [1,6] [3,7] is Just [3,6]" (equal (Just (interval 3 6)) (intersection (interval 1 6) (interval 3 7)))
             , test "intersection of [1,3] [6,7] is Nothing" (equal Nothing (intersection (interval 1 3) (interval 6 7)))
+            ]
+          )
+        , ( "Assignment 3"
+          , [ test "singleton of different values are different" (negate (equal (singleton 1) (singleton 2)))
+            , test "head of singleton is value" (equal 37 (head (singleton 37)))
+            , test "head of a cons" (equal 51 (head (cons 51 (singleton 37))))
+            , test "tail of a cons" (equal (Just (singleton 37)) (tail (cons 51 (singleton 37))))
+            , test "tail of a singleton" (equal Nothing (tail (singleton 37)))
             ]
           )
         ]
