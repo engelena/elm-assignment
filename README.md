@@ -17,6 +17,17 @@ For example, Let's calculate the Collatz function for `28`. Now `28` is an even 
 
 Open `src/Assignment/One.elm` and implement the Collatz function.
 
+### Assignment 2
+Create a type alias for an [`Interval` type][interval]. You should also implement 
+
+1. A constructor.
+2. The convex hull of two intervals
+3. The intersection of two intervals.
+
+Type signatures are provided as well as default implementations. The `intersection` signature uses the [`Maybe` type][maybe].
+
 [demo]: https://github.com/HAN-ASD-DT/elm-demonstration
 [docs]: http://elm-lang.org/docs
 [collatz]: https://en.wikipedia.org/wiki/Collatz_conjecture
+[interval]: https://en.wikipedia.org/wiki/Interval_(mathematics)
+[maybe]: https://package.elm-lang.org/packages/elm/core/latest/Maybe

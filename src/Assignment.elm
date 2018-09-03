@@ -1,6 +1,7 @@
 module Assignment exposing (main)
 
 import Assignment.One exposing (collatz)
+import Assignment.Two exposing (hull, intersection, interval)
 import Html
 import Html.Attributes as Attribute
 
@@ -8,15 +9,23 @@ import Html.Attributes as Attribute
 main =
     describe
         [ ( "Assignment 1"
-          , [ test "value of 1" (equal 4 (collatz 1))
-            , test "value of 4" (equal 2 (collatz 4))
-            , test "value of 2" (equal 1 (collatz 2))
+          , [ test "(collatz 1) should be 4" (equal 4 (collatz 1))
+            , test "(collatz 4) should be 2" (equal 2 (collatz 4))
+            , test "(collatz 2) should be 1" (equal 1 (collatz 2))
+            ]
+          )
+        , ( "Assignment 2"
+          , [ test "interval orders arguments" (equal (interval 1 3) (interval 3 1))
+            , test "interval with different bounds are different" (negate (equal (interval 1 2) (interval 2 3)))
+            , test "hull of [1,3] [6,7] is [1,7]" (equal (interval 1 7) (hull (interval 1 3) (interval 6 7)))
+            , test "intersection of [1,6] [3,7] is Just [3,6]" (equal (Just (interval 3 6)) (intersection (interval 1 6) (interval 3 7)))
+            , test "intersection of [1,3] [6,7] is Nothing" (equal Nothing (intersection (interval 1 3) (interval 6 7)))
             ]
           )
         ]
 
 
-describe : List ( String, List (Expectation t) ) -> Html.Html msg
+describe : List ( String, List Expectation ) -> Html.Html msg
 describe expectationGroups =
     let
         groups =
@@ -25,7 +34,7 @@ describe expectationGroups =
     Html.div [ Attribute.class "groups" ] groups
 
 
-viewExpectationGroup : ( String, List (Expectation t) ) -> Html.Html msg
+viewExpectationGroup : ( String, List Expectation ) -> Html.Html msg
 viewExpectationGroup ( description, expectations ) =
     let
         viewOfExpectations =
@@ -37,7 +46,7 @@ viewExpectationGroup ( description, expectations ) =
         )
 
 
-viewExpectation : Expectation t -> Html.Html msg
+viewExpectation : Expectation -> Html.Html msg
 viewExpectation expectation =
     Html.div [ Attribute.class "expectation" ]
         [ Html.span [ Attribute.class "description" ] [ Html.text expectation.description ]
@@ -45,7 +54,7 @@ viewExpectation expectation =
         ]
 
 
-viewOfReport : Report t -> Html.Html msg
+viewOfReport : Report -> Html.Html msg
 viewOfReport report =
     let
         success =
@@ -79,16 +88,14 @@ viewOfResolution resolution =
     Html.span [ Attribute.class "resolution" ] [ Html.text text ]
 
 
-type alias Expectation t =
+type alias Expectation =
     { description : String
-    , report : Report t
+    , report : Report
     }
 
 
-type alias Report t =
+type alias Report =
     { expectationType : ExpectationType
-    , left : t
-    , right : t
     , resolution : Resolution
     }
 
@@ -102,12 +109,12 @@ type Resolution
     | Incorrect String
 
 
-test : String -> Report t -> Expectation t
+test : String -> Report -> Expectation
 test description report =
     { description = description, report = report }
 
 
-equal : a -> a -> Report a
+equal : a -> a -> Report
 equal left right =
     let
         resolution =
@@ -118,7 +125,20 @@ equal left right =
                 Incorrect "Expected arguments to be equal"
     in
     { expectationType = Equal
-    , left = left
-    , right = right
     , resolution = resolution
     }
+
+
+negate : Report -> Report
+negate report =
+    let
+        opposite : Resolution -> Resolution
+        opposite resolution =
+            case resolution of
+                Correct ->
+                    Incorrect "Expected to be correct"
+
+                Incorrect _ ->
+                    Correct
+    in
+    { report | resolution = opposite report.resolution }
