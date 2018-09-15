@@ -28,6 +28,7 @@ main =
             , test "head of singleton is value" (equal 37 (head (singleton 37)))
             , test "head of a cons" (equal 51 (head (cons 51 (singleton 37))))
             , test "tail of a cons" (equal (Just (singleton 37)) (tail (cons 51 (singleton 37))))
+            , test "tail of a longercons" (equal (Just (cons 51 (singleton 37))) (tail (cons 12 (cons 51 (singleton 37)))))
             , test "tail of a singleton" (equal Nothing (tail (singleton 37)))
             ]
           )
