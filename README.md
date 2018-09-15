@@ -27,7 +27,7 @@ Create a type alias for an [`Interval` type][interval]. You should also implemen
 Type signatures are provided as well as default implementations. The `intersection` signature uses the [`Maybe` type][maybe].
 
 ### Assignment 3
-Study the [documentation for List][list] in order to create a more specialized type. I.e. a **non-empty list**. A non-empty list is a list that guarantees to contain at least a single element. Furthermore, you should also implementations
+Study the [documentation for List][list] in order to create a more specialized type. I.e. a **non-empty list**. A non-empty list is a list that guarantees to contain at least a single element. Furthermore, you should also implement
 
 1. A `singleton` constructor.
 2. `cons` function that appends an element to a non-empty list.
